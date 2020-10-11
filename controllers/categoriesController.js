@@ -12,5 +12,15 @@ module.exports = {
         })
         category.save();
         res.json(category);
+    },
+    delete: async function (req, res, next) {
+        try{
+            console.log(req.params.id);
+            const data = await categoriesModel.deleteOne({ _id: req.params.id });
+            res.status(200).json(data);
+        }catch(e){
+            next(e)
+        }
+
     }
 }

@@ -37,13 +37,29 @@ const productsSchema = new mongoose.Schema({
         type: Number,
         min: [1,errorMessage.GENERAL.minlength],
         required: [true,errorMessage.GENERAL.campo_obligatorio],
-        get: function (price_get) {
-            return price_get * 1.21;
-        }
+        //get: function (price_get) {
+        //    return price_get * 1.21;
+      //  }
+    },
+    precio_oferta:{
+      type:Number,
+      min: [1,errorMessage.GENERAL.minlength],
+      //required: [true,errorMessage.GENERAL.campo_obligatorio],
+    //  get: function (price_get) {
+      //    return price_get * 1.21;
+      //}
+    },
+    imagen: {
+        type: String,
+        trim: true
+    },
+    destacado:{
+      type: String,
+      trim: true
     },
     quantity: Number,
     tags:[tagsSchema]
-    
+
 });
 productsSchema.statics.findBydIdAndValidate = async function(id){
     const document = await this.findById(id);
@@ -52,7 +68,7 @@ productsSchema.statics.findBydIdAndValidate = async function(id){
             error:true,
             message:"No existe categoria"
         }
-        
+
     }
     return document;
 }

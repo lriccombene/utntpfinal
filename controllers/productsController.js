@@ -11,18 +11,18 @@ module.exports = {
             }
             console.log(queryFind)
             const productos = await productsModel.paginate(queryFind,{
-                
+
                 //sort:{[req.query.sort]:req.query.sortOrder},
                 sort:{name:1},
                 populate:"category",
-                limit:req.query.limit || 1,
+                limit:req.query.limit || 10,
                 page:req.query.page || 1 //numero de pagina
             });
             res.status(200).json(productos);
         }catch(e){
             next(e)
         }
-        
+
     },
     getById: async function (req, res, next) {
         try{
@@ -36,7 +36,6 @@ module.exports = {
         }catch(e){
             next(e)
         }
-        
     },
     create: async function (req, res, next) {
         console.log(req.body);
@@ -57,14 +56,14 @@ module.exports = {
             })
             console.log(req.body.tags)
             const document = await  product.save();
-           
+
             res.status(201).json(document);
         }catch(e){
             console.log(e)
             //e.status=204;
             next(e);
         }
-        
+
     },
     update: async function (req, res, next) {
         try{
@@ -74,7 +73,7 @@ module.exports = {
         }catch(e){
             next(e)
         }
-        
+
     },
     delete: async function (req, res, next) {
         try{
@@ -84,6 +83,6 @@ module.exports = {
         }catch(e){
             next(e)
         }
-        
+
     }
 }
